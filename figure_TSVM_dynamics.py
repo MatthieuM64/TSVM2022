@@ -45,7 +45,7 @@ movie=False
 #Read parameters in command line.
 for arg in sys.argv[1:]:
 	if "-v0=" in arg:
-		v0=float(arg[9:])
+		v0=float(arg[4:])
 	elif "-eta=" in arg:
 		eta=float(arg[5:])
 	elif "-rho0=" in arg:
@@ -59,7 +59,7 @@ for arg in sys.argv[1:]:
 	elif "-ran=" in arg:
 		ran=int(arg[5:])
 	elif "-DT=" in arg:
-		DT=float(arg[4:])
+		DT=int(arg[4:])
 	elif "-tmax=" in arg:
 		tmax=int(arg[6:])
 	elif "-NCPU=" in arg:
