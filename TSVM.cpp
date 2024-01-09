@@ -46,56 +46,35 @@ particle::particle(const int &LX, const int &LY, const int &spin0, const int &in
 {
 	//Spin of the particle.
 	spin=spin0;
-	
-	//Displacement.
-	dx=0.;
-	dy=0.;
-	
-	//Position.
-	if (init==0 or init==1)
-	{
-		if (spin==-1) //Particle B.
-		{
-			x=LX*ran()/8;
-			y=LY*ran();
-		}
-		else //Particle A.
-		{
-			x=0.5*LX+LX*ran()/8;
-			y=LY*ran();
-		}
-	}
-	else //Random position.
-	{
-		x=LX*ran();
-		y=LY*ran();
-	}
-	
-	//Orientation.
+
+	//Orientation and position.
 	if (init==0) //APF state.
 	{
-		if (spin==-1)
-		{
-			theta=M_PI;
-		}
-		else
-		{
-			theta=0;
-		}
+		theta=0.5*M_PI*(1-spin);
+		x=0.25*LX*(1-spin)+0.125*LX*ran();
+		y=LY*ran();
 	}
 	else if (init==1) //PF state.
 	{
 		theta=0;
+		x=0.25*LX*(1-spin)+0.125*LX*ran();
+		y=LY*ran();
 	}
 	else if (init==2) //Random orientation.
 	{
 		theta=M_PI*(2*ran()-1);
+		x=LX*ran();
+		y=LY*ran();
 	}
 	else
 	{
 		cerr << "BAD INIT VALUE: " << init << endl;
 		abort();
 	}
+
+	//Displacement.
+	dx=0.;
+	dy=0.;
 }
 
 void particle::update(const double &v0, const double &eta, const int &LX, const int &LY)
